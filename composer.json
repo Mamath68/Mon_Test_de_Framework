@@ -1,0 +1,16 @@
+{
+    "name": "mathi/mon_framework",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mamath68",
+            "email": "mathieu.stamm@gmail.Com"
+        }
+    ],
+    "require": {}
+}
