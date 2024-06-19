@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            $data = ['title' => 'Bienvenue sur mon framework PHP', 'params' => 'ceci est un critère en plus'];
+            $data = ['title' => 'Bienvenue sur mon framework PHP'];
             return [
                 $this->render('home/index', $data),
             ];

@@ -1,33 +1,30 @@
-<div class="uk-container uk-container-small uk-margin-top">
-    <h2><?= $title ?></h2>
-    
+<div class="container mx-auto px-4 py-8">
+    <h2 class="mb-2"><?= $title ?></h2>
+
     <?php if (isset($error)) : ?>
-        <div class="uk-alert-danger" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p><?= $error ?></p>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+            <span class="block sm:inline"><?= $error ?></span>
         </div>
     <?php endif; ?>
-    <form action="/register" method="post" class="uk-form-stacked">
-        <div class="uk-margin">
-            <label class="uk-form-label" for="username">Username:</label>
-            <div class="uk-form-controls">
-                <input class="uk-input" id="username" name="username" type="text" required>
-            </div>
+
+    <form action="/register" method="post" class="mt-6">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" required>
         </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="email">Email:</label>
-            <div class="uk-form-controls">
-                <input class="uk-input" id="email" name="email" type="email" required>
-            </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" required>
         </div>
-        <div class="uk-margin">
-            <label class="uk-form-label" for="password">Password:</label>
-            <div class="uk-form-controls">
-                <input class="uk-input" id="password" name="password" type="password" required>
-            </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" required>
         </div>
-        <div class="uk-margin">
-            <button class="uk-button uk-button-primary" type="submit">Register</button>
+
+        <div class="mb-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Register</button>
         </div>
     </form>
 </div>
