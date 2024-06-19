@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+    @apply container w-full min-h-screen p-8 m-auto overflow-auto;
+}
+
+h1 {
+    @apply mb-4 text-5xl font-bold;
+}
+
+h2 {
+    @apply mb-4 text-4xl font-bold;
+}
+
+h3 {
+    @apply mb-4 text-3xl font-bold;
+}
+
+h4 {
+    @apply mb-4 text-2xl font-bold;
+}
+
+h5 {
+    @apply mb-4 text-xl font-bold;
+}
+
+h6 {
+    @apply mb-4 text-lg font-bold;
+}
+
+.card-area {
+    @apply mt-8 mb-3 min-h-[480px];
+}
+
+.column1 {
+    @apply float-left p-12 w-3/10 max-xl:w-full;
+}
+
+.column2 {
+    @apply max-xl:w-full float-left w-7/10 p-3 mt-[4%];
+}
+
+.card-image {
+    @apply max-xl:text-center;
+}
+
+.card-image img {
+    @apply max-w-md w-full rounded-2xl min-h-[456.48px] min-w-80 h-full;
+}
+
+.card-typing-icon {
+    @apply w-5 h-5 align-sub;
+}
+
+
+.card-data-info {
+    @apply grid grid-cols-3 pl-0 max-w-[950px] gap-3 max-xl:grid-cols-2;
+}
+
+
+ul.card-data-info li {
+    @apply list-none min-w-40 text-left p-1.5 block rounded-md text-white bg-[#7d3e12];
+
+}
+
+.card-data-header {
+    @apply text-sm;
+}
+
+.card-data-cost,
+.card-data-class {
+    @apply ml-0 !important;
+}
+
+
+.card-data-subheader {
+    @apply flex items-center;
+
+}
+
+.card-data-subheader a {
+    @apply m-1 no-underline text-inherit hover:underline;
+}
+
+ul, ol, li {
+    list-style: none;
+}
