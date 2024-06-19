@@ -12,5 +12,8 @@
             "email": "mathieu.stamm@gmail.Com"
         }
     ],
-    "require": {}
+    "require": {
+        "robmorgan/phinx": "^0.16.1",
+        "guzzlehttp/guzzle": "^7.8"
+    }
 }

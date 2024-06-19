@@ -1,0 +1,19 @@
+<div>
+    <h2 class="uk-heading-medium"><?= $title ?></h2>
+    <p>Ceci est une page de test pour afficher les cartes.</p>
+
+    <div class="uk-grid uk-child-width-1-4@s" uk-grid>
+        <?php foreach ($cards as $card) : ?>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">
+                        <a href="/card/<?= $card['id'] ?>">
+                            <?= $card['name'] ?>
+                        </a>
+                    </h3>
+                    <img src="<?= $card['card_images'][0]['image_url'] ?>" alt="<?= $card['name'] ?>" title="<?= $card['name'] ?>">
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

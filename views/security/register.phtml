@@ -1,0 +1,33 @@
+<div class="uk-container uk-container-small uk-margin-top">
+    <h2><?= $title ?></h2>
+    
+    <?php if (isset($error)) : ?>
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><?= $error ?></p>
+        </div>
+    <?php endif; ?>
+    <form action="/register" method="post" class="uk-form-stacked">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="username">Username:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" id="username" name="username" type="text" required>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="email">Email:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" id="email" name="email" type="email" required>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="password">Password:</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" id="password" name="password" type="password" required>
+            </div>
+        </div>
+        <div class="uk-margin">
+            <button class="uk-button uk-button-primary" type="submit">Register</button>
+        </div>
+    </form>
+</div>

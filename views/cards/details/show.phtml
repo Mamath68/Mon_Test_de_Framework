@@ -1,0 +1,101 @@
+<div class="uk-container">
+    <h2 class="uk-heading-medium"><?= $title ?></h2>
+
+    <?php if ($card) : ?>
+        <div class="uk-grid uk-child-width-1-2@m" uk-grid>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-card-media-top">
+                        <img src="<?= $card['card_images'][0]['image_url'] ?>" alt="<?= $card['name'] ?>" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h1 class="uk-card-title"><?= $card['name'] ?></h1>
+                    <ul class="uk-list uk-list-divider">
+                        <?php if ($card['type'] == "Spell Card" || $card['type'] == "Trap Card") : ?>
+                            <li>
+                                <i class="fa-solid fa-book"></i>
+                                <span class="uk-text-bold">Type:</span> <?= $card['race'] . ' ' . $card['type'] ?>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <i class="fa-solid fa-book"></i>
+                                <span class="uk-text-bold">Type:</span> <?= $card['type'] ?>
+                            </li>
+                            <li>
+                                <span class="uk-text-bold">Typing:</span>
+                                <img class="card-typing-icon" src="https://images.ygoprodeck.com/images/cards/icons/race/<?= $card['race'] ?>.png" alt="<?= $card['race'] ?>" title="<?= $card['race'] ?>" loading="lazy">
+                                <?= $card['race'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['attribute'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">Attribute:</span>
+                                <img class="card-typing-icon" src="https://images.ygoprodeck.com/images/cards/<?= $card['attribute'] ?>.jpg" alt="<?= $card['attribute'] ?>" title="<?= $card['attribute'] ?>" loading="lazy">
+                                <?= $card['attribute'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['level'])) : ?>
+                            <li>
+                                <img class="card-typing-icon" src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="level : <?= $card['level'] ?>" title="level : <?= $card['level'] ?>" loading="lazy" />
+                                <span class="uk-text-bold">Level/Rank:</span> <?= $card['level'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['scale'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">Pendulum Scale:</span>
+                                <img class="card-typing-icon" src="https://www.db.yugioh-card.com/yugiohdb/external/image/parts/icon_pendulum.png" alt="Scale : <?= $card['scale'] ?>" title="Scale : <?= $card['scale'] ?>" loading="lazy">
+                                <?= $card['scale'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['linkval'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">Link Value:</span>
+                                <img class="card-typing-icon" src="https://ygoprodeck.com/wp-content/uploads/2017/01/level.png" alt="Link : <?= $card['linkval'] ?>" title="Link : <?= $card['linkval'] ?>" loading="lazy">
+                                <?= $card['linkval'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['atk'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">ATK:</span>
+                                <img class="card-typing-icon" src="public/img/swords.png" title="Attack : <?= $card['atk'] ?>" loading="lazy">
+                                <?= $card['atk'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['def'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">DEF:</span>
+                                <i class="fa-solid fa-shield" title="defense : <?= $card['def'] ?>"></i>
+                                <?= $card['def'] ?>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (isset($card['archetype'])) : ?>
+                            <li>
+                                <span class="uk-text-bold">Archetype:</span>
+                                <img class="uk-margin-small-right" src="public/img/roundflask.png" alt="<?= $card['archetype'] ?>" title="Archetype : <?= $card['archetype'] ?>" loading="lazy">
+                                <?= $card['archetype'] ?>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <span class="uk-text-bold">Archetype:</span>
+                                <img class="uk-margin-small-right" src="public/img/roundflask.png" alt="No Archetype" loading="lazy">
+                                This card has no Archetype
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                    <?php if (isset($card['pend_desc'])) : ?>
+                        <h4 class="uk-heading-divider">Pendulum Effect:</h4>
+                        <p><?= $card['pend_desc'] ?></p>
+                        <h4 class="uk-heading-divider">Monster Text / Monster Effect:</h4>
+                        <p><?= $card['monster_desc'] ?></p>
+                    <?php else : ?>
+                        <h4 class="uk-heading-divider">Card Description / Effect:</h4>
+                        <p><?= $card['desc'] ?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

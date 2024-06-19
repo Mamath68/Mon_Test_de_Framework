@@ -1,5 +1,4 @@
 <?php
-// core/Router.php
 
 namespace Core;
 
@@ -9,14 +8,16 @@ class Router
 
     public function add($route, $callback)
     {
-        $this->routes[$route] = $callback;
+        $route = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $route);
+        $this->routes['#^' . $route . '$#'] = $callback;
     }
 
     public function dispatch($url)
     {
         foreach ($this->routes as $route => $callback) {
-            if ($route === $url) {
-                return call_user_func($callback);
+            if (preg_match($route, $url, $matches)) {
+                array_shift($matches); // Remove the full match
+                return call_user_func_array($callback, $matches);
             }
         }
         // 404 Not Found

@@ -3,7 +3,7 @@
 return [
     'db' => [
         'host' => '127.0.0.1',
-        'dbname' => 'mon_framework',
+        'dbname' => 'framework2024',
         'user' => 'root',
         'password' => '',
     ],
