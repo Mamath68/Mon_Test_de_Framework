@@ -6,11 +6,10 @@ define('CSS_DIR', "/public/css/styles.css"); //le chemin où se trouvent les fic
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Controllers\CardController;
+use App\Controllers\HomeController;
+use App\Controllers\SecurityController;
 use Core\Router;
 use Core\Session;
-use App\Controllers\SecurityController;
-use App\Controllers\HomeController;
 
 Session::start();
 
@@ -24,8 +23,6 @@ $router->add('/register', [new SecurityController(), 'register']);
 $router->add('/loginForm', [new SecurityController(), 'loginForm']);
 $router->add('/login', [new SecurityController(), 'login']);
 $router->add('/logout', [new SecurityController(), 'logout']);
-$router->add('/cards/{page}', [new CardController(), 'index']);
-$router->add('/card/{id}', [new CardController(), 'show']);
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $router->dispatch($url);
