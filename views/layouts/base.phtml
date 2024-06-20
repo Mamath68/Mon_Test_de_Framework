@@ -34,9 +34,6 @@
                         <li class="nav-item">
                             <a class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/contact') ? 'active' : '' ?>" <?= ($_SERVER['REQUEST_URI'] == '/contact') ? 'aria-current="page"' : '' ?> href="/contact">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] == '/cards') ? 'active' : '' ?>" <?= ($_SERVER['REQUEST_URI'] == '/cards') ? 'aria-current="page"' : '' ?> href="/cards">Les Cartes</a>
-                        </li>
                     </ul>
                     <div class="flex mt-2">
                         <?php if (null !== Core\Middleware::auth()) : ?>
