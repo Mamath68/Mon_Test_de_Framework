@@ -15,14 +15,17 @@ Session::start();
 
 $router = new Router();
 
-$router->add('/', [new HomeController(), 'index']);
-$router->add('/about', [new HomeController(), 'about']);
-$router->add('/contact', [new HomeController(), 'contact']);
-$router->add('/registerForm', [new SecurityController(), 'registerForm']);
-$router->add('/register', [new SecurityController(), 'register']);
-$router->add('/loginForm', [new SecurityController(), 'loginForm']);
-$router->add('/login', [new SecurityController(), 'login']);
-$router->add('/logout', [new SecurityController(), 'logout']);
+$homeController = new HomeController();
+$securityController = new SecurityController();
+
+$router->add('/', [$homeController, 'index']);
+$router->add('/about', [$homeController, 'about']);
+$router->add('/contact', [$homeController, 'contact']);
+$router->add('/registerForm', [$securityController, 'registerForm']);
+$router->add('/register', [$securityController, 'register']);
+$router->add('/loginForm', [$securityController, 'loginForm']);
+$router->add('/login', [$securityController, 'login']);
+$router->add('/logout', [$securityController, 'logout']);
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $router->dispatch($url);

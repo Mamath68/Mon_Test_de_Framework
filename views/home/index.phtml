@@ -1,2 +1,13 @@
-<h1><?= $title ?></h1>
-<p>Ceci est une page de test pour votre framework PHP.</p>
+<?php if (null !== Core\Middleware::auth()) : ?>
+    <h1><?= $title ?></h1>
+    <p>Ceci est une page de test pour votre framework PHP.</p>
+    <?php else : ?>
+        <h2>
+            Hello
+        </h2>
+        <p>
+            <?= Core\Middleware::getUsername() ?>
+        </p>
+        <p>Ceci est une page de test pour votre framework PHP.</p>
+
+<?php endif; ?>
