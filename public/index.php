@@ -2,8 +2,9 @@
 
 
 define('VIEW_DIR', "../views/"); //le chemin où se trouvent les vues
+define('BASE_DIR', "../");
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once BASE_DIR . 'vendor/autoload.php';
 
 use App\Controllers\HomeController;
 use App\Controllers\SecurityController;
