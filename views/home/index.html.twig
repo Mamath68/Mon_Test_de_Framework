@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+		{% block title %}
+			{{title}}
+		{% endblock %}
+
+		{% block body %}
+
+			{% if app.user %}
+				<h1>
+					Bienvenue
+					{{ app.user.pseudo}}
+				</h1>
+			{% else %}
+				<h1>
+					{{title}}
+				</h1>
+
+			{% endif %}
+
+		{% endblock %}
+

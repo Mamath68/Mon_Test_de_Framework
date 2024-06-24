@@ -3,24 +3,26 @@
 namespace App\Controllers;
 
 use App\Models\Managers\UserManager;
-use Core\Controller;
+use App\Services\TwigService;
 
-class SecurityController extends Controller
+
+class SecurityController
 {
     private $userManager;
+    private $twigService;
+
 
     public function __construct()
     {
         $this->userManager = new UserManager();
+        $this->twigService = new TwigService();
     }
-    
+
     public function loginForm()
     {
         $data = ['title' => 'Login'];
         try {
-            return [
-                $this->render('security/login', $data),
-            ];
+            return $this->twigService->render('security/login', $data);
         } catch (\Throwable $th) {
             throw new \ErrorException("Erreur lors de l'affichage de la vue' : " . $th->getMessage());
         }
@@ -30,9 +32,7 @@ class SecurityController extends Controller
     {
         $data = ['title' => 'Register'];
         try {
-            return [
-                $this->render('security/register', $data),
-            ];
+            return $this->twigService->render('security/register', $data);
         } catch (\Throwable $th) {
             throw new \ErrorException("Erreur lors de l'affichage de la vue' : " . $th->getMessage());
         }

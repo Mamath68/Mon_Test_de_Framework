@@ -2,19 +2,24 @@
 
 namespace App\Controllers;
 
-use Core\Controller;
+use App\Services\TwigService;
 
-class HomeController extends Controller
+class HomeController
 {
+    private $twigService;
+
+    public function __construct()
+    {
+        $this->twigService = new TwigService();
+    }
+
     public function index()
     {
         try {
             $data = ['title' => 'Bienvenue sur mon framework PHP'];
-            return [
-                $this->render('home/index', $data),
-            ];
+            return $this->twigService->render('home/index', $data);
         } catch (\Throwable $th) {
-            throw new \ErrorException("Erreur lors de l'affichage de la vue' : " . $th->getMessage());
+            throw new \ErrorException("Erreur lors de l'affichage de la vue : " . $th->getMessage());
         }
     }
 
@@ -22,22 +27,19 @@ class HomeController extends Controller
     {
         $data = ['title' => 'About Me'];
         try {
-            return [
-                $this->render('home/about', $data),
-            ];
+            return $this->twigService->render('home/about', $data);
         } catch (\Throwable $th) {
-            throw new \ErrorException("Erreur lors de l'affichage de la vue' : " . $th->getMessage());
+            throw new \ErrorException("Erreur lors de l'affichage de la vue : " . $th->getMessage());
         }
     }
+
     public function contact()
     {
         $data = ['title' => 'Contact Me'];
         try {
-            return [
-                $this->render('home/contact', $data),
-            ];
+            return $this->twigService->render('home/contact', $data);
         } catch (\Throwable $th) {
-            throw new \ErrorException("Erreur lors de l'affichage de la vue' : " . $th->getMessage());
+            throw new \ErrorException("Erreur lors de l'affichage de la vue : " . $th->getMessage());
         }
     }
 }

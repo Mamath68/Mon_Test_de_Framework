@@ -1,27 +1,55 @@
 <?php
 
-namespace Core;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
-class Router
-{
-    private $routes = [];
+$routes = new RouteCollection();
 
-    public function add($route, $callback)
-    {
-        $route = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $route);
-        $this->routes['#^' . $route . '$#'] = $callback;
-    }
+$routes->add('home', new Route('/', [
+    '_controller' => 'App\Controllers\HomeController::index',
+]));
 
-    public function dispatch($url)
-    {
-        foreach ($this->routes as $route => $callback) {
-            if (preg_match($route, $url, $matches)) {
-                array_shift($matches); // Remove the full match
-                return call_user_func_array($callback, $matches);
-            }
-        }
-        // 404 Not Found
-        http_response_code(404);
-        echo "404 Not Found";
-    }
-}
+$routes->add('about', new Route('/about', [
+    '_controller' => 'App\Controllers\HomeController::about',
+]));
+
+$routes->add('contact', new Route('/contact', [
+    '_controller' => 'App\Controllers\HomeController::contact',
+]));
+
+$routes->add('cards', new Route('/cards/{page}', [
+    '_controller' => 'App\Controllers\CardsController::index',
+    'page' => 1,
+]));
+
+$routes->add('card_show', new Route('/card/{id}', [
+    '_controller' => 'App\Controllers\CardsController::show',
+]));
+
+$routes->add('card_show_archetype', new Route('/cards/archetype/{archetype}/page/{page}', [
+    '_controller' => 'App\Controllers\CardsController::archetype',
+]));
+
+
+$routes->add('loginForm', new Route('/loginForm', [
+    '_controller' => 'App\Controllers\SecurityController::loginForm',
+]));
+
+$routes->add('login', new Route('/login', [
+    '_controller' => 'App\Controllers\SecurityController::login',
+]));
+$routes->add('registerForm', new Route('/registerForm', [
+    '_controller' => 'App\Controllers\SecurityController::registerForm',
+]));
+
+$routes->add('register', new Route('/register', [
+    '_controller' => 'App\Controllers\SecurityController::register',
+]));
+
+$routes->add('logout', new Route('/logout', [
+    '_controller' => 'App\Controllers\SecurityController::logout',
+]));
+
+
+return $routes;
+

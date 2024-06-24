@@ -2,30 +2,53 @@
 
 
 define('VIEW_DIR', "../views/"); //le chemin où se trouvent les vues
-define('CSS_DIR', "/public/css/styles.css"); //le chemin où se trouvent les fichiers    publics (CSS, JS, IMG)
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Controllers\CardController;
-use Core\Router;
 use Core\Session;
-use App\Controllers\SecurityController;
-use App\Controllers\HomeController;
 
 Session::start();
 
-$router = new Router();
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\HttpClient;
+use App\Controllers\CardsController;
+use App\Services\CardsService;
+use App\Services\TwigService;
 
-$router->add('/', [new HomeController(), 'index']);
-$router->add('/about', [new HomeController(), 'about']);
-$router->add('/contact', [new HomeController(), 'contact']);
-$router->add('/registerForm', [new SecurityController(), 'registerForm']);
-$router->add('/register', [new SecurityController(), 'register']);
-$router->add('/loginForm', [new SecurityController(), 'loginForm']);
-$router->add('/login', [new SecurityController(), 'login']);
-$router->add('/logout', [new SecurityController(), 'logout']);
-$router->add('/cards/{page}', [new CardController(), 'index']);
-$router->add('/card/{id}', [new CardController(), 'show']);
+// Instanciation des services nécessaires
+$httpClient = HttpClient::create();
+$cardsService = new CardsService($httpClient);
+$twigService = new TwigService(); // Assurez-vous que ce service est correctement implémenté
 
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$router->dispatch($url);
+// Routes
+$routes = include __DIR__ . '/../core/Router.php';
+
+$request = Request::createFromGlobals();
+$context = new RequestContext();
+$context->fromRequest($request);
+
+$matcher = new UrlMatcher($routes, $context);
+
+try {
+    $parameters = $matcher->match($context->getPathInfo());
+
+    $controllerAction = explode('::', $parameters['_controller']);
+    $controllerName = $controllerAction[0];
+    $controllerMethod = $controllerAction[1];
+
+    unset($parameters['_controller']);
+    $parameters = array_values($parameters);
+
+    $response = call_user_func_array([$controller, $controllerMethod], $parameters);
+    $response->send();
+} catch (ResourceNotFoundException $e) {
+    $response = new Response('Page not found', 404);
+    $response->send();
+} catch (\Exception $e) {
+    $response = new Response('An error occurred: ' . $e->getMessage(), 500);
+    $response->send();
+}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+		{% block title %}
+			Yu-Gi-Oh! Cards
+		{% endblock %}
+
+		{% block body %}
+			<h1 class="mb-6 text-2xl font-bold">
+				Yu-Gi-Oh! Cards
+			</h1>
+
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+				{% for card in cards %}
+					<div class="p-4 text-center bg-white rounded shadow">
+						<img src="{{ card.card_images[0].image_url }}" alt="{{ card.name }}" class="object-cover w-full h-auto">
+						<h2 class="mt-2 text-lg font-semibold">
+							<a href="{{ path('card_detail', {'id': card.id}) }}">
+								{{ card.name }}
+							</a>
+						</h2>
+						{% if card.type == 'Spell Card' or card.type == 'Trap Card'%}
+							<p class="mt-2">
+								{{ card.race ~ ' ' ~ card.type }}
+							</p>
+
+						{% else %}
+							<p class="mt-2">
+								{{ card.type }}
+							</p>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="flex items-center justify-between mt-6">
+				{% if page > 1 %}
+					<a href="{{ path('app_cards', {page: page - 1, num: num}) }}" class="px-4 py-2 text-white bg-blue-500 rounded">
+						Previous
+					</a>
+				{% else %}
+					<span class="px-4 py-2 text-white bg-gray-300 rounded">
+						Previous
+					</span>
+				{% endif %}
+
+				<span>
+					Page
+					{{ page }}
+				</span>
+
+				{% if (page * num) < total %}
+					<a href="{{ path('app_cards', {page: page + 1, num: num}) }}" class="px-4 py-2 text-white bg-blue-500 rounded">
+						Next
+					</a>
+				{% else %}
+					<span class="px-4 py-2 text-white bg-gray-300 rounded">
+						Next
+					</span>
+				{% endif %}
+			</div>
+		{% endblock %}
+
