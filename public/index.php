@@ -2,7 +2,6 @@
 
 
 define('VIEW_DIR', "../views/"); //le chemin où se trouvent les vues
-define('CSS_DIR', "/public/css/styles.css"); //le chemin où se trouvent les fichiers    publics (CSS, JS, IMG)
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
